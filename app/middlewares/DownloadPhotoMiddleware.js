@@ -4,7 +4,7 @@ require('dotenv').config();
 
 const storage = multer.diskStorage({
     destination: (req, file, cb) => {
-        cb(null, path.join(__dirname, process.env.UPLOAD_PATH));
+        cb(null, path.join(process.env.UPLOAD_PATH));
     },
     filename: (req, file, cb) => {
         cb(null, `${file.fieldname}-${Date.now()}.jpg`);

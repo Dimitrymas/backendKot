@@ -10,6 +10,7 @@ module.exports = function (resObj, req, res, next) {
     else if (resObj instanceof ApiError) {
         res.status(resObj.status).json({success: false, response: {error: resObj.message}})
     }
+
     else {
         return res.status(500).json({success: false, response: {error: 'Непредвиденная ошибка'}})
     }

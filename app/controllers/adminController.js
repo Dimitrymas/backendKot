@@ -26,15 +26,27 @@ class AdminController {
         }
     }
 
+    async changeProductPosition(req, res, next) {
+        const id = req.body.id
+        const id2 = req.body.id2
+        try {
+            const resp = await AdminService.changeProductPosition(id, id2)
+            next(ApiSuccess.success(resp))
+        } catch (e) {
+            next(e)
+        }
+    }
+
     async createProduct(req, res, next) {
         const body = req.body
         const name = body.name
+        const code = body.code
         const info = body.info
         const link = body.link
         const description = body.description
-        const filename = req.file
+        const filename = req.file.filename
         try {
-            const resp = await AdminService.createProduct(name, info, link, description, filename)
+            const resp = await AdminService.createProduct(name, code, info, link, description, filename)
             next(ApiSuccess.success(resp))
         } catch (e) {
             next(e)
