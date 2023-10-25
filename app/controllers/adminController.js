@@ -43,10 +43,11 @@ class AdminController {
         const code = body.code
         const info = body.info
         const link = body.link
+        const type = body.type
         const description = body.description
         const filename = req.file.filename
         try {
-            const resp = await AdminService.createProduct(name, code, info, link, description, filename)
+            const resp = await AdminService.createProduct(name, code, info, type, link, description, filename)
             next(ApiSuccess.success(resp))
         } catch (e) {
             next(e)

@@ -1,5 +1,6 @@
 const jwt = require('jsonwebtoken')
 const ApiError = require("../api_response/ApiError");
+require('dotenv').config()
 
 module.exports = function (req, res, next) {
     if (req.method === "OPTION") {

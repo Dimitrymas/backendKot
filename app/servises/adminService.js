@@ -30,12 +30,13 @@ class AdminService {
         }
     }
 
-    async createProduct(name, code, info, link, description, filename) {
+    async createProduct(name, code, info, type, link, description, filename) {
         const product = await ProductModel.create({
             name,
             code,
             info,
             link,
+            type,
             description,
             position: await ProductModel.countDocuments(),
             filename,

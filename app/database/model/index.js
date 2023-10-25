@@ -10,6 +10,7 @@ const ProductSchema = new Schema({
     info: {type: String, required: true},
     code: {type: String, required: true},
     link: {type: String, required: true},
+    type: {type: String, required: true},
     description: {type: String, required: true},
     position: {type: Number, required: true},
     filename: {type: String, required: true},

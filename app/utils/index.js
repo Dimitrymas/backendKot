@@ -1,9 +1,9 @@
 const jwt = require('jsonwebtoken')
+require('dotenv').config()
 
 class Utils {
     static generateJWT() {
-        const jwtT = jwt.sign({role: "admin"}, process.env.SECRET_KEY);
-        return jwtT
+        return jwt.sign({role: "admin"}, process.env.SECRET_KEY);
     }
 }
 
