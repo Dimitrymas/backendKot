@@ -49,24 +49,28 @@ class AdminService {
         }
     }
 
-    async changeProductPosition(id, id2) {
-        const product1 = await ProductModel.findOne({_id: id})
-        const product2 = await ProductModel.findOne({_id: id2})
-        if (!product1 || !product2) {
-            throw ApiError.badRequest('Product not found')
+    async changeProductsPosition(products) {
+        const findAndChangeCandidatePosition = async (id, position) => {
+            const dBProduct = await ProductModel.findById(id)
+            if (!dBProduct) {
+                throw ApiError.badRequest('Product not found')
+            }
+            dBProduct.position = position
+            try {
+                await dBProduct.save()
+            } catch (e) {
+                throw ApiError.internal('Error while changing product position')
+            }
         }
-        const position1 = product1.position
-        const position2 = product2.position
-        product1.position = position2
-        product2.position = position1
-        try {
-            await product1.save()
-            await product2.save()
-            return ApiSuccess.success({'message': 'Product position changed'})
-        } catch (e) {
-            throw ApiError.internal('Error while changing product position')
+
+        const tasks = []
+        for (const product of products) {
+            tasks.push(findAndChangeCandidatePosition(product.id, product.position))
         }
+        await Promise.all(tasks)
+        return ApiSuccess.success({'message': 'Products position changed'})
     }
 }
 
-module.exports = new AdminService()
+module
+    .exports = new AdminService()

@@ -26,11 +26,10 @@ class AdminController {
         }
     }
 
-    async changeProductPosition(req, res, next) {
-        const id = req.body.id
-        const id2 = req.body.id2
+    async changeProductsPosition(req, res, next) {
+        const products = req.body.products
         try {
-            const resp = await AdminService.changeProductPosition(id, id2)
+            const resp = await AdminService.changeProductsPosition(products)
             next(ApiSuccess.success(resp))
         } catch (e) {
             next(e)

@@ -21,3 +21,15 @@ services:
       ME_CONFIG_MONGODB_ADMINUSERNAME: root
       ME_CONFIG_MONGODB_ADMINPASSWORD: 41567
       ME_CONFIG_MONGODB_URL: mongodb://root:41567@mongo:27017/
+
+  webserver:
+    image: kot-site-backend
+    restart: always
+    ports:
+      - 80:80
+    env_file:
+      - .env
+    volumes:
+      - ./uploads:/uploads
+    depends_on:
+        - mongo

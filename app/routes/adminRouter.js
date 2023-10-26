@@ -6,7 +6,7 @@ const AuthMiddleware = require('../middlewares/AuthMiddleware')
 
 router.post('/auth/login/', adminController.login)
 
-router.put('/product/', AuthMiddleware, adminController.changeProductPosition)
+router.put('/product/', AuthMiddleware, adminController.changeProductsPosition)
 router.post('/product/', AuthMiddleware, upload.single('file'), adminController.createProduct)
 router.delete('/product/', AuthMiddleware, adminController.deleteProduct)
 

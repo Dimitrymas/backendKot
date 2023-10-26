@@ -3,7 +3,6 @@ const ApiSuccess = require('../api_response/ApiSuccess')
 
 
 module.exports = function (resObj, req, res, next) {
-    console.log(resObj)
     if (resObj instanceof ApiSuccess) {
         res.status(200).json({success: true, response:resObj.response})
     }
